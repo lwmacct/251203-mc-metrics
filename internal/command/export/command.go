@@ -15,12 +15,16 @@ var Command = &cli.Command{
 	Before:    command.BeforeLoadConfig,
 	Action:    actionExportJSON,
 	Commands: []*cli.Command{
-		version.Command,
 		jsonCommand,
 		csvCommand,
 		nativeCommand,
+		version.Command,
 	},
 	Flags: exportFlags(),
+}
+
+func init() {
+	Command.Commands = append(Command.Commands, command.NewCompletionCommand(Command))
 }
 
 // exportFlags 返回导出命令的 flags (基础 + 导出特定)

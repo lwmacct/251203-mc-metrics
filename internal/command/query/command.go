@@ -17,13 +17,18 @@ var Command = &cli.Command{
 	Before:    command.BeforeLoadConfig,
 	Action:    actionQuery,
 	Commands: []*cli.Command{
-		version.Command,
 		metricsCommand,
 		labelsCommand,
 		labelValuesCommand,
 		seriesCommand,
+		version.Command,
 	},
 	Flags: queryFlags(),
+}
+
+func init() {
+	// 延迟添加 completion 命令，避免循环引用
+	Command.Commands = append(Command.Commands, command.NewCompletionCommand(Command))
 }
 
 // queryFlags 返回查询命令的 flags (基础 + 查询特定)

@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/lwmacct/251203-mc-metrics/internal/command"
-	"github.com/lwmacct/251203-mc-metrics/internal/command/completion"
 	"github.com/lwmacct/251203-mc-metrics/internal/command/export"
 	importcmd "github.com/lwmacct/251203-mc-metrics/internal/command/import"
 	"github.com/lwmacct/251203-mc-metrics/internal/command/query"
@@ -24,10 +23,11 @@ func main() {
 			exportCommand(),
 			importCommand(),
 			version.Command,
-			completion.Command,
 		},
 		Flags: command.BaseFlags(),
 	}
+	// 动态添加 completion 命令
+	app.Commands = append(app.Commands, command.NewCompletionCommand(app))
 
 	if err := app.Run(context.Background(), os.Args); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)

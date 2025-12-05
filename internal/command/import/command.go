@@ -16,13 +16,17 @@ var Command = &cli.Command{
 	Before:    command.BeforeLoadConfig,
 	Action:    actionImportJSON,
 	Commands: []*cli.Command{
-		version.Command,
 		jsonCommand,
 		csvCommand,
 		nativeCommand,
 		prometheusCommand,
+		version.Command,
 	},
 	Flags: importFlags(),
+}
+
+func init() {
+	Command.Commands = append(Command.Commands, command.NewCompletionCommand(Command))
 }
 
 // importFlags 返回导入命令的 flags (基础 + 导入特定)
