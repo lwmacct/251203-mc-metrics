@@ -8,9 +8,9 @@ VictoriaMetrics 命令行工具集，支持 MetricsQL 查询、数据导入导�
 go install github.com/lwmacct/251203-vm-metrics/cmd/vm-metrics@latest
 
 # 或单独安装
-go install github.com/lwmacct/251203-vm-metrics/cmd/mc-vmquery@latest
-go install github.com/lwmacct/251203-vm-metrics/cmd/mc-vmexport@latest
-go install github.com/lwmacct/251203-vm-metrics/cmd/mc-vmimport@latest
+go install github.com/lwmacct/251203-vm-metrics/cmd/vm-query@latest
+go install github.com/lwmacct/251203-vm-metrics/cmd/vm-export@latest
+go install github.com/lwmacct/251203-vm-metrics/cmd/vm-import@latest
 ```
 
 ## 快速开始
@@ -40,9 +40,9 @@ vm-metrics e '{job="node"}'         # export
 vm-metrics i data.json              # import
 
 # 独立命令 (等效)
-mc-vmquery 'up{job="prometheus"}'
-mc-vmexport '{job="node"}'
-mc-vmimport data.json
+vm-query 'up{job="prometheus"}'
+vm-export '{job="node"}'
+vm-import data.json
 ```
 
 ## 命令结构
